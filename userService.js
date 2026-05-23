@@ -16,7 +16,7 @@ class UserService {
 
             const id = i + 1;
 
-            const username = `user${id}`;
+            const username = `Alan Jesus Uzeda Rivera${id}`;
 
             const password =
                 Math.random()
