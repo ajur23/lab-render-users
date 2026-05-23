@@ -1,82 +1,19 @@
 const express = require('express');
-
-const UserService =
-require('./userService');
+const UserService = require('./userService');
 
 const app = express();
+const userService = new UserService();
 
-const port = process.env.PORT || 3000;
-
-app.use(express.json());
-
-const userService =
-new UserService();
-
-userService.addUser({
-id: 4,
-username: "AlanJesusUzedaRivera",
-password: "123456"
-});
+const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-
-res.send(
-'API USERS FUNCIONANDO'
-);
-
+    res.send('Servidor funcionando en Render 🚀');
 });
 
-app.get('/users',
-(req, res) => {
-
-res.json(
-userService.getUsers()
-);
-
+app.get('/users', (req, res) => {
+    res.json(userService.getUsers());
 });
 
-app.post('/users',
-(req, res) => {
-
-const {
-username,
-password
-}
-=
-req.body;
-
-const newUser = {
-
-id:
-userService
-.getUsers()
-.length
-+ 1,
-
-username,
-
-password
-
-};
-
-userService
-.addUser(
-newUser
-);
-
-res
-.status(201)
-.json(newUser);
-
+app.listen(PORT, () => {
+    console.log(`Servidor iniciado en puerto ${PORT}`);
 });
-
-app.listen(
-port,
-() => {
-
-console.log(
-`Server running at port ${port}`
-);
-
-}
-);
